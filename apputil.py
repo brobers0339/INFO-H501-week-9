@@ -3,10 +3,13 @@ import pandas as pd
 
 class GroupEstimate:
     def __init__(self, estimate='mean'):
+        if estimate not in ['mean', 'median']:
+            raise ValueError("Estimate must be 'mean' or 'median'")
+        
         self.estimate = estimate
         self.group_estimates = None
     
-   def fit(self, X: pd.DataFrame, y):
+    def fit(self, X: pd.DataFrame, y):
         df = X.copy()
         df['y'] = y
         agg_type = 'mean' if self.estimate == 'mean' else 'median'
