@@ -6,7 +6,7 @@ class GroupEstimate:
         self.estimate = estimate
         self.group_estimates = None
     
-    def fit(self, X: pd.DataFrame, y):
+   def fit(self, X: pd.DataFrame, y):
         df = X.copy()
         df['y'] = y
         agg_type = 'mean' if self.estimate == 'mean' else 'median'
@@ -21,4 +21,4 @@ class GroupEstimate:
         X = pd.DataFrame(X, columns=self.group_estimates.columns[:-1])
         merged_df = X.merge(self.group_estimates, how='left',on=list(X.columns))
         
-        return merged_df['y'].tolist()
+        return merged_df['y'].to_numpy()
